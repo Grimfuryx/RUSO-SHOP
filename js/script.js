@@ -384,6 +384,17 @@ function slugify(v){
   return String(v).toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
 
+function setProductsNavVisibility(){
+  const productOpen = Boolean(
+    document.getElementById('collectionModal')?.classList.contains('show') ||
+    document.getElementById('pdModal')?.classList.contains('show')
+  );
+  ['navProducts','mNavProducts'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = productOpen ? 'none' : '';
+  });
+}
+
 function openCollection(category){
   const items = products.filter(p => getCategory(p) === category);
   document.getElementById('collectionModalTitle').textContent = category;
@@ -397,12 +408,14 @@ function openCollection(category){
   });
 
   document.getElementById('collectionModal').classList.add('show');
+  setProductsNavVisibility();
   document.getElementById('overlayBg').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 
 function closeCollection(){
   document.getElementById('collectionModal').classList.remove('show');
+  setProductsNavVisibility();
   syncOverlayAndScroll();
 }
 
@@ -541,6 +554,7 @@ function openPD(id){
   document.getElementById('pdBuyBtn')?.addEventListener('click', pdBuyNow);
 
   document.getElementById('pdModal').classList.add('show');
+  setProductsNavVisibility();
   document.getElementById('overlayBg').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -580,6 +594,7 @@ function pdBuyNow(){
 
 function closePD(){
   document.getElementById('pdModal').classList.remove('show');
+  setProductsNavVisibility();
   syncOverlayAndScroll();
 }
 
@@ -762,6 +777,7 @@ function closeAllOverlays(){
   document.getElementById('pdModal')?.classList.remove('show');
   document.getElementById('collectionModal')?.classList.remove('show');
   document.getElementById('coModal')?.classList.remove('show');
+  setProductsNavVisibility();
   syncOverlayAndScroll();
 }
 
@@ -1544,8 +1560,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('fNavAdmin')?.addEventListener('click', e => { e.preventDefault(); goAdmin(); });
 
   // Search & Cart Action Bindings
-  document.getElementById('searchBtn')?.addEventListener('click', toggleSearch);
-  document.getElementById('searchInput')?.addEventListener('input', e => handleSearch(e.target.value));
   document.getElementById('cartBtn')?.addEventListener('click', openCart);
   document.getElementById('burgerBtn')?.addEventListener('click', toggleMobileMenu);
 
