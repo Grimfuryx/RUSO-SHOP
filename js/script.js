@@ -797,6 +797,19 @@ function toggleMobileMenu(){
   m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
 }
 
+function closeMobileMenu(){
+  const m = document.getElementById('mobileMenu');
+  if(m) m.style.display = 'none';
+}
+
+// Close the mobile menu when anything outside the menu / burger button is clicked
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobileMenu');
+  if(!m || m.style.display !== 'flex') return;
+  if(m.contains(e.target) || e.target.closest('#burgerBtn')) return;
+  closeMobileMenu();
+}, true);
+
 /* ---------- Checkout & Order Flow ---------- */
 function openCheckout(){
   if(!cart.length){
