@@ -9,7 +9,6 @@
   --danger:#c0392b;
   --success:#27ae60;
   --warn:#d35400;
-  --nav-h:63px; /* real height of the fixed header */
   box-sizing:border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -18,7 +17,7 @@ html{scroll-padding-top:72px; scroll-behavior:smooth; overflow-x:hidden; max-wid
 *,*::before,*::after{box-sizing:inherit;}
 body{
   margin:0;
-  padding-top:var(--nav-h);
+  padding-top:72px;
   background:var(--paper);
   color:var(--ink);
   font-family:'Inter',sans-serif;
@@ -74,6 +73,7 @@ nav.links a:hover{opacity:1;}
 .burger svg{width:22px;height:22px;}
 
 @media(max-width:860px){
+  body{padding-top:64px;}
   html{scroll-padding-top:64px;}
   nav.links{display:none;}
   .burger{display:flex;}
@@ -119,10 +119,44 @@ nav.links a:hover{opacity:1;}
   padding:14px 24px;font-size:13px;font-weight:700;letter-spacing:0.03em;
   border:1px solid var(--ink);transition:all .15s;display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;
 }
-.btn-solid{background:var(--paper);color:var(--ink);border-color:var(--paper);}
-.btn-solid:hover{background:transparent;color:var(--paper);}
-.btn-outline{background:transparent;color:var(--paper);border-color:rgba(250,249,246,0.5);}
-.btn-outline:hover{background:var(--paper);color:var(--ink);}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink); /* Uses your text color for the border */
+  transition: all 0.2s ease;   /* Smooths the hover animation */
+}
+
+.btn-outline:hover {
+  background: var(--ink);     /* Fills the button with the text color */
+  color: var(--paper);        /* Changes text to the background color */
+}
+/* Solid button (default: for light backgrounds) */
+/* Make Add to Cart look identical to Buy Now / View Product */
+.btn-solid{
+  background:transparent;
+  color:var(--ink);
+  border:2px solid var(--ink);
+  transition:all .2s ease;
+}
+.btn-solid:hover{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+/* Same style, light colors, only on the dark hero */
+.hero .btn-solid,
+.hero .btn-outline{
+  background:transparent;
+  color:var(--paper);
+  border-color:var(--paper);
+}
+.hero .btn-solid:hover,
+.hero .btn-outline:hover{
+  background:var(--paper);
+  color:var(--ink);
+}
+
 .hero-visual{
   position:relative;height:100%;min-height:420px;
   display:flex;align-items:center;justify-content:center;
