@@ -1,4 +1,4 @@
-# RUSO — Footwear & Streetwear Shop
+# [RUSO](https://rusonow.com) — Footwear & Streetwear Shop
 
 Premium black & white, Gen-Z streetwear-style shoe store with live backend synchronization, cart management, instant checkout, and real-time admin portal.
 
